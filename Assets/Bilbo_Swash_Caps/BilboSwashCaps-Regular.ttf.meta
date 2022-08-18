@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 726ba8b1cc27cd1438784a0a555afefb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Bilbo Swash Caps
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: dd50d6bea4e0d65409bd6a092c7e6602, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
