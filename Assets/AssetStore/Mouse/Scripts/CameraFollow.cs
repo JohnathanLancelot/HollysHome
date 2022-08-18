@@ -6,13 +6,13 @@ public class CameraFollow : MonoBehaviour
 {
     public Vector3 offset;
     public Transform target;
-    public float SmoothSpeed = 1.0f;
+    //public float SmoothSpeed = 1.0f;
 
     void Update()
     {
         Vector3 DesiredPosition = target.position + offset;
-        Vector3 SmoothedPosition = Vector3.Lerp(transform.position, DesiredPosition, SmoothSpeed * Time.deltaTime);
-        transform.position = SmoothedPosition;
+        //Vector3 SmoothedPosition = Vector3.Lerp(transform.position, DesiredPosition, SmoothSpeed * Time.deltaTime);
+        //transform.position = SmoothedPosition;
         transform.LookAt(target);
     }
 }
