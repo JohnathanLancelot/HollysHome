@@ -8,6 +8,7 @@ TagManager:
   - load
   - controls
   - menu
+  - trap
   layers:
   - Default
   - TransparentFX

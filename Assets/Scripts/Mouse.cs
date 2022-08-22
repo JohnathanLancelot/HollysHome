@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Mouse : MonoBehaviour
 {
+    public GameObject mouseTrapAnim;
+    public AudioSource mouseTrapAudio;
+
     private Animator mouse;
 
     CharacterController mouseController;
@@ -13,29 +17,29 @@ public class Mouse : MonoBehaviour
 
     public Vector3 direction;
 
-    [SerializeField]
-    Transform mouseTransform;
+    //[SerializeField]
+    //Transform mouseTransform;
 
     float moveX;
     float moveZ;
 
     // Jump Variables:
-    [SerializeField]
-    bool isGrounded;
+    //[SerializeField]
+    //bool isGrounded;
 
-    [SerializeField]
-    float groundCheckDistance;
+    //[SerializeField]
+    //float groundCheckDistance;
 
-    [SerializeField]
-    LayerMask groundLayerMask;
+    //[SerializeField]
+    //LayerMask groundLayerMask;
 
-    [SerializeField]
-    float gravity = -0.2f;
+    //[SerializeField]
+    //float gravity = -0.2f;
 
-    [SerializeField]
-    float jumpHeight = 0.03f;
+    //[SerializeField]
+    //float jumpHeight = 0.03f;
 
-    Vector3 velocity;
+    //Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +75,22 @@ public class Mouse : MonoBehaviour
             // Points the mouse in the right direction:
             transform.forward = moveDir;
 
-            mouse.SetBool("idle", false);
-            mouse.SetBool("run", true);
-            mouse.SetBool("jump", false);
+            if (!Input.GetKeyDown(KeyCode.Space))
+            {
+                mouse.SetBool("run", true);
+                mouse.SetBool("idle", false);
+                mouse.SetBool("jump", false);
+            }
+            else
+            {
+                //if (isGrounded)
+                //{
+                //    velocity.y = jumpHeight;
+                //}
+                mouse.SetBool("jump", true);
+                mouse.SetBool("idle", false);
+                mouse.SetBool("run", false);
+            }
         }
         else
         {
@@ -118,5 +135,16 @@ public class Mouse : MonoBehaviour
         //        mouse.SetBool("walk", false);
         //        mouse.SetBool("run", false);
         //    }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("BANG!");
+        if (other.gameObject.tag == "trap")
+        {
+            Debug.Log("BANG!");
+            mouseTrapAnim.GetComponent<Animation>().Play();
+            mouseTrapAudio.Play();
+        }
     }
 }
