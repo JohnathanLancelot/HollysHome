@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Mouse : MonoBehaviour
 {
+    public InGameScript inGameScript;
+
     public GameObject mouseTrapAnim;
     public AudioSource mouseTrapAudio;
 
@@ -16,6 +18,9 @@ public class Mouse : MonoBehaviour
     public float rotationSpeed = 720;
 
     public Vector3 direction;
+
+    // Boolean determining if the mouse should be dead:
+    public bool isDead = false;
 
     //[SerializeField]
     //Transform mouseTransform;
@@ -46,6 +51,7 @@ public class Mouse : MonoBehaviour
     {
         mouse = GetComponent<Animator>();
         mouseController = GetComponent<CharacterController>();
+        inGameScript = FindObjectOfType<InGameScript>();
     }
 
     // Update is called once per frame
@@ -59,8 +65,11 @@ public class Mouse : MonoBehaviour
         // Might make things less jittery:
         moveDir.Normalize();
 
-        // Actually moves the mouse:
-        transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
+        if (!isDead)
+        {
+            // Actually moves the mouse:
+            transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
+        }
 
         // Jumping:
         //isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundLayerMask);
@@ -70,46 +79,59 @@ public class Mouse : MonoBehaviour
         //    velocity.y = -2.0f;
         //}
 
-        if (moveDir != Vector3.zero)
+        if (isDead == false)
         {
-            // Points the mouse in the right direction:
-            transform.forward = moveDir;
-
-            if (!Input.GetKeyDown(KeyCode.Space))
+            if (moveDir != Vector3.zero)
             {
-                mouse.SetBool("run", true);
-                mouse.SetBool("idle", false);
-                mouse.SetBool("jump", false);
+                // Points the mouse in the right direction:
+                transform.forward = moveDir;
+
+                if (!Input.GetKeyDown(KeyCode.Space))
+                {
+                    mouse.SetBool("run", true);
+                    mouse.SetBool("idle", false);
+                    mouse.SetBool("jump", false);
+                }
+                else
+                {
+                    //if (isGrounded)
+                    //{
+                    //    velocity.y = jumpHeight;
+                    //}
+                    mouse.SetBool("jump", true);
+                    mouse.SetBool("idle", false);
+                    mouse.SetBool("run", false);
+                }
             }
             else
             {
-                //if (isGrounded)
-                //{
-                //    velocity.y = jumpHeight;
-                //}
-                mouse.SetBool("jump", true);
-                mouse.SetBool("idle", false);
-                mouse.SetBool("run", false);
+                if (!Input.GetKeyDown(KeyCode.Space))
+                {
+                    mouse.SetBool("idle", true);
+                    mouse.SetBool("run", false);
+                    mouse.SetBool("jump", false);
+                }
+                else
+                {
+                    //if (isGrounded)
+                    //{
+                    //    velocity.y = jumpHeight;
+                    //}
+                    mouse.SetBool("jump", true);
+                    mouse.SetBool("idle", false);
+                    mouse.SetBool("run", false);
+                }
             }
         }
         else
         {
-            if (!Input.GetKeyDown(KeyCode.Space))
-            {
-                mouse.SetBool("idle", true);
-                mouse.SetBool("run", false);
-                mouse.SetBool("jump", false);
-            }
-            else
-            {
-                //if (isGrounded)
-                //{
-                //    velocity.y = jumpHeight;
-                //}
-                mouse.SetBool("jump", true);
-                mouse.SetBool("idle", false);
-                mouse.SetBool("run", false);
-            }
+            mouse.SetBool("jump", false);
+            mouse.SetBool("idle", false);
+            mouse.SetBool("run", false);
+            mouse.SetBool("death", true);
+
+            // Make the death screen appear:
+            inGameScript.deathScreenTrigger = true;
         }
 
         // More for jumping:
@@ -139,12 +161,11 @@ public class Mouse : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("BANG!");
         if (other.gameObject.tag == "trap")
         {
-            Debug.Log("BANG!");
             mouseTrapAnim.GetComponent<Animation>().Play();
             mouseTrapAudio.Play();
+            isDead = true;
         }
     }
 }

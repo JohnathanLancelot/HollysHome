@@ -17,6 +17,11 @@ public class InGameScript : MonoBehaviour
     [SerializeField]
     GameObject optionsScreen;
 
+    [SerializeField]
+    GameObject deathScreen;
+
+    public bool deathScreenTrigger = false;
+
     bool isMenuUp;
 
     // Start is called before the first frame update
@@ -25,23 +30,38 @@ public class InGameScript : MonoBehaviour
         menuScreen.SetActive(false);
         controlsScreen.SetActive(false);
         optionsScreen.SetActive(false);
+        deathScreen.SetActive(false);
         isMenuUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (deathScreenTrigger == true)
         {
-            if (isMenuUp == false)
+            deathScreen.SetActive(true);
+
+            // Allow the user to exit:
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                menuScreen.SetActive(true);
-                isMenuUp = true;
+                Debug.Log("EXIT");
+                Application.Quit();
             }
-            else
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.M))
             {
-                menuScreen.SetActive(false);
-                isMenuUp = false;
+                if (isMenuUp == false)
+                {
+                    menuScreen.SetActive(true);
+                    isMenuUp = true;
+                }
+                else
+                {
+                    menuScreen.SetActive(false);
+                    isMenuUp = false;
+                }
             }
         }
     }

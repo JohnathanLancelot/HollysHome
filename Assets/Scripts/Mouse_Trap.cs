@@ -19,13 +19,4 @@ public class Mouse_Trap : MonoBehaviour
     {
 
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Trap")
-        {
-            mouseTrapAnim.GetComponent<Animation>().Play();
-            mouseTrapAudio.Play();
-        }
-    }
 }
