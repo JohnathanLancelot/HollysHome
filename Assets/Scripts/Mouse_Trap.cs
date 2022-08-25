@@ -24,7 +24,6 @@ public class Mouse_Trap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Trap")
         {
-            Debug.Log("BANG!");
             mouseTrapAnim.GetComponent<Animation>().Play();
             mouseTrapAudio.Play();
         }
