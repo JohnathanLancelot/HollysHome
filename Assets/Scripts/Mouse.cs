@@ -6,6 +6,7 @@ using UnityEngine;
 public class Mouse : MonoBehaviour
 {
     public InGameScript inGameScript;
+    public HUDScript hudScript;
 
     public GameObject mouseTrapAnim;
     public AudioSource mouseTrapAudio;
@@ -55,6 +56,7 @@ public class Mouse : MonoBehaviour
         mouse = GetComponent<Animator>();
         mouseController = GetComponent<CharacterController>();
         inGameScript = FindObjectOfType<InGameScript>();
+        hudScript = FindObjectOfType<HUDScript>();
     }
 
     // Update is called once per frame
@@ -191,6 +193,16 @@ public class Mouse : MonoBehaviour
             mouseTrapAnim.GetComponent<Animation>().Play();
             mouseTrapAudio.Play();
             isDead = true;
+        }
+        else if (other.gameObject.tag == "water")
+        {
+            // Reset thirst to 1:
+            hudScript.thirstAmount = 1;
+        }
+        else if (other.gameObject.tag == "food")
+        {
+            // Reset hunger to 1:
+            hudScript.hungerAmount = 1;
         }
     }
 }

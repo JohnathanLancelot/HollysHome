@@ -9,6 +9,8 @@ TagManager:
   - controls
   - menu
   - trap
+  - water
+  - food
   layers:
   - Default
   - TransparentFX
