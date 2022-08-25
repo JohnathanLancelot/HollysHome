@@ -10,6 +10,9 @@ public class Mouse : MonoBehaviour
     public GameObject mouseTrapAnim;
     public AudioSource mouseTrapAudio;
 
+    [SerializeField]
+    public GameObject riggedMouse;
+
     private Animator mouse;
 
     CharacterController mouseController;
@@ -65,7 +68,7 @@ public class Mouse : MonoBehaviour
         // Might make things less jittery:
         moveDir.Normalize();
 
-        if (!isDead)
+        if ((!isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
         {
             // Actually moves the mouse:
             transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
@@ -79,56 +82,78 @@ public class Mouse : MonoBehaviour
         //    velocity.y = -2.0f;
         //}
 
+        if ((inGameScript.isMenuUp) || (inGameScript.isWindowUp))
+        {
+            mouse.SetBool("run", false);
+            mouse.SetBool("jump", false);
+            mouse.SetBool("idle", true);
+        }
+
         if (isDead == false)
         {
-            if (moveDir != Vector3.zero)
+            if ((!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
             {
-                // Points the mouse in the right direction:
-                transform.forward = moveDir;
+                if (moveDir != Vector3.zero)
+                {
+                    // Points the mouse in the right direction:
+                    transform.forward = moveDir;
 
-                if (!Input.GetKeyDown(KeyCode.Space))
-                {
-                    mouse.SetBool("run", true);
-                    mouse.SetBool("idle", false);
-                    mouse.SetBool("jump", false);
+                    if (!Input.GetKeyDown(KeyCode.Space))
+                    {
+                        // Running animation:
+                        mouse.SetBool("run", true);
+                        mouse.SetBool("idle", false);
+                        mouse.SetBool("jump", false);
+                    }
+                    else
+                    {
+                        //if (isGrounded)
+                        //{
+                        //    velocity.y = jumpHeight;
+                        //}
+
+                        // Jumping animation
+                        mouse.SetBool("jump", true);
+                        mouse.SetBool("idle", false);
+                        mouse.SetBool("run", false);
+                    }
                 }
                 else
                 {
-                    //if (isGrounded)
-                    //{
-                    //    velocity.y = jumpHeight;
-                    //}
-                    mouse.SetBool("jump", true);
-                    mouse.SetBool("idle", false);
-                    mouse.SetBool("run", false);
-                }
-            }
-            else
-            {
-                if (!Input.GetKeyDown(KeyCode.Space))
-                {
-                    mouse.SetBool("idle", true);
-                    mouse.SetBool("run", false);
-                    mouse.SetBool("jump", false);
-                }
-                else
-                {
-                    //if (isGrounded)
-                    //{
-                    //    velocity.y = jumpHeight;
-                    //}
-                    mouse.SetBool("jump", true);
-                    mouse.SetBool("idle", false);
-                    mouse.SetBool("run", false);
+                    if (!Input.GetKeyDown(KeyCode.Space))
+                    {
+                        mouse.SetBool("idle", true);
+                        mouse.SetBool("run", false);
+                        mouse.SetBool("jump", false);
+                    }
+                    else
+                    {
+                        //if (isGrounded)
+                        //{
+                        //    velocity.y = jumpHeight;
+                        //}
+                        mouse.SetBool("jump", true);
+                        mouse.SetBool("idle", false);
+                        mouse.SetBool("run", false);
+                    }
                 }
             }
         }
         else
         {
-            mouse.SetBool("jump", false);
-            mouse.SetBool("idle", false);
-            mouse.SetBool("run", false);
-            mouse.SetBool("death", true);
+            // Check if 'no dead bodies mode' is enabled:
+            if (inGameScript.deadBodiesShown)
+            {
+                mouse.SetBool("jump", false);
+                mouse.SetBool("idle", false);
+                mouse.SetBool("run", false);
+                mouse.SetBool("death", true);
+            }
+            else
+            {
+                // Make the mouse disappear:
+                riggedMouse.SetActive(false);
+            }
 
             // Make the death screen appear:
             inGameScript.deathScreenTrigger = true;

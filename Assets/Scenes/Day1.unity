@@ -881,6 +881,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9500000, guid: 91cfb63431e97a24e96082ffb620636f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 91cfb63431e97a24e96082ffb620636f, type: 3}
+--- !u!1 &950343205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 91cfb63431e97a24e96082ffb620636f, type: 3}
+  m_PrefabInstance: {fileID: 950343204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1018,11 @@ MonoBehaviour:
   controlsScreen: {fileID: 491934516}
   optionsScreen: {fileID: 1428738207}
   deathScreen: {fileID: 924043553}
+  deadBodiesToggle: {fileID: 1797663624}
+  deadBodiesShown: 1
   deathScreenTrigger: 0
+  isMenuUp: 0
+  isWindowUp: 0
 --- !u!4 &982175925
 Transform:
   m_ObjectHideFlags: 0
@@ -1107,6 +1116,23 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114917341206479120, guid: bf2c0bf3ad9171a42a865b2d0bf0cb13, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bf2c0bf3ad9171a42a865b2d0bf0cb13, type: 3}
+--- !u!1 &1368377803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5371710284672328159, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+  m_PrefabInstance: {fileID: 5371710285897627667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1368377808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368377803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00754fdbe4cc5d443bd184268e98f06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1386322906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1175,6 +1201,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 982175925}
     m_Modifications:
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 982175924}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: noDeadBodiesOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 215040331317135751, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1410,8 +1464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ad3cd4405a9dd4d8196893cfe0fbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameScript: {fileID: 0}
   mouseTrapAnim: {fileID: 596955102}
   mouseTrapAudio: {fileID: 521293390}
+  riggedMouse: {fileID: 950343205}
   moveSpeed: 1.3
   rotationSpeed: 0
   direction: {x: 0, y: 0, z: 0}
@@ -1432,6 +1488,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1797663624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 215040330959397108, guid: 7a21249991b0fc1458572f283293b9d9, type: 3}
+  m_PrefabInstance: {fileID: 1428738205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1991587809
 GameObject:
   m_ObjectHideFlags: 0

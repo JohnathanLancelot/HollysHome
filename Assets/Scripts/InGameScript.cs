@@ -20,9 +20,16 @@ public class InGameScript : MonoBehaviour
     [SerializeField]
     GameObject deathScreen;
 
+    [SerializeField]
+    Toggle deadBodiesToggle;
+
+    public bool deadBodiesShown = true;
+
     public bool deathScreenTrigger = false;
 
-    bool isMenuUp;
+    public bool isMenuUp;
+
+    public bool isWindowUp;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +39,7 @@ public class InGameScript : MonoBehaviour
         optionsScreen.SetActive(false);
         deathScreen.SetActive(false);
         isMenuUp = false;
+        isWindowUp = false;
     }
 
     // Update is called once per frame
@@ -52,7 +60,7 @@ public class InGameScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (isMenuUp == false)
+                if ((isMenuUp == false) && (isWindowUp == false))
                 {
                     menuScreen.SetActive(true);
                     isMenuUp = true;
@@ -72,6 +80,7 @@ public class InGameScript : MonoBehaviour
         menuScreen.SetActive(false);
         isMenuUp = false;
         optionsScreen.SetActive(true);
+        isWindowUp = true;
     }
 
     // In-Game Menu's Game Controls Button:
@@ -80,6 +89,7 @@ public class InGameScript : MonoBehaviour
         menuScreen.SetActive(false);
         isMenuUp = false;
         controlsScreen.SetActive(true);
+        isWindowUp = true;
     }
 
     // In-Game Menu's Exit Button:
@@ -94,6 +104,7 @@ public class InGameScript : MonoBehaviour
     {
         menuScreen.SetActive(false);
         isMenuUp = false;
+        isWindowUp = false;
     }
 
     // In-Game Menu's Controls Screen's Back Button:
@@ -102,6 +113,7 @@ public class InGameScript : MonoBehaviour
         controlsScreen.SetActive(false);
         menuScreen.SetActive(true);
         isMenuUp = true;
+        isWindowUp = false;
     }
 
     // In-Game Menu's Options Screen's Back Button:
@@ -110,5 +122,19 @@ public class InGameScript : MonoBehaviour
         optionsScreen.SetActive(false);
         menuScreen.SetActive(true);
         isMenuUp = true;
+        isWindowUp = false;
+    }
+
+    // Toggle For The 'No Dead Bodies' Option:
+    public void noDeadBodiesOption()
+    {
+        if (deadBodiesToggle.isOn)
+        {
+            deadBodiesShown = false;
+        }
+        else
+        {
+            deadBodiesShown = true;
+        }
     }
 }
