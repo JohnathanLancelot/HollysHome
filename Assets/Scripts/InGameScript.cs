@@ -27,7 +27,19 @@ public class InGameScript : MonoBehaviour
     AudioSource backgroundMusic;
 
     [SerializeField]
+    AudioSource eatingSFX;
+
+    [SerializeField]
+    AudioSource drinkingSFX;
+
+    [SerializeField]
+    AudioSource mouseTrapSFX;
+
+    [SerializeField]
     Toggle muteMusic;
+
+    [SerializeField]
+    Toggle muteSFX;
 
     [SerializeField]
     Slider volumeSlider;
@@ -40,6 +52,8 @@ public class InGameScript : MonoBehaviour
 
     public bool isWindowUp;
 
+    public bool soundEffectsMuted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +64,14 @@ public class InGameScript : MonoBehaviour
         isMenuUp = false;
         isWindowUp = false;
 
+        eatingSFX.Stop();
+        drinkingSFX.Stop();
+        mouseTrapSFX.Stop();
+
         volumeSlider.value = backgroundMusic.volume;
+        eatingSFX.volume = volumeSlider.value;
+        drinkingSFX.volume = volumeSlider.value;
+        mouseTrapSFX.volume = volumeSlider.value;
     }
 
     // Update is called once per frame
@@ -162,9 +183,35 @@ public class InGameScript : MonoBehaviour
         }
     }
 
+    // Toggle For SFX:
+    public void MuteSFX()
+    {
+        if (soundEffectsMuted)
+        {
+            soundEffectsMuted = false;
+            eatingSFX.volume = volumeSlider.value;
+            drinkingSFX.volume = volumeSlider.value;
+            mouseTrapSFX.volume = volumeSlider.value;
+        }
+        else
+        {
+            soundEffectsMuted = true;
+            eatingSFX.volume = 0;
+            drinkingSFX.volume = 0;
+            mouseTrapSFX.volume = 0;
+        }
+    }
+
     // Volume Slider:
     public void VolumeChange()
     {
         backgroundMusic.volume = volumeSlider.value;
+
+        if (!soundEffectsMuted)
+        {
+            eatingSFX.volume = volumeSlider.value;
+            drinkingSFX.volume = volumeSlider.value;
+            mouseTrapSFX.volume = volumeSlider.value;
+        }
     }
 }

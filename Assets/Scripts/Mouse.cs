@@ -9,7 +9,14 @@ public class Mouse : MonoBehaviour
     public HUDScript hudScript;
 
     public GameObject mouseTrapAnim;
+
     public AudioSource mouseTrapAudio;
+
+    [SerializeField]
+    public AudioSource eatingSFX;
+
+    [SerializeField]
+    public AudioSource drinkingSFX;
 
     [SerializeField]
     public GameObject riggedMouse;
@@ -191,18 +198,32 @@ public class Mouse : MonoBehaviour
         if (other.gameObject.tag == "trap")
         {
             mouseTrapAnim.GetComponent<Animation>().Play();
-            mouseTrapAudio.Play();
             isDead = true;
+
+            if (!inGameScript.soundEffectsMuted)
+            {
+                mouseTrapAudio.Play();
+            }
         }
         else if (other.gameObject.tag == "water")
         {
             // Reset thirst to 1:
             hudScript.thirstAmount = 1;
+
+            if (!inGameScript.soundEffectsMuted)
+            {
+                drinkingSFX.Play();
+            }
         }
         else if (other.gameObject.tag == "food")
         {
             // Reset hunger to 1:
             hudScript.hungerAmount = 1;
+
+            if (!inGameScript.soundEffectsMuted)
+            {
+                eatingSFX.Play();
+            }
         }
     }
 }
