@@ -11,6 +11,7 @@ TagManager:
   - trap
   - water
   - food
+  - firstNDBMToggle
   layers:
   - Default
   - TransparentFX

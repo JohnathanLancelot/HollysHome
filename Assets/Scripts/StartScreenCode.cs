@@ -17,6 +17,11 @@ public class StartScreenCode : MonoBehaviour
     [SerializeField]
     public GameObject gameControls;
 
+    [SerializeField]
+    Toggle startNDBMToggle;
+
+    public bool startDeadBodiesShown;
+
     // Start Function:
     void Start()
     {
@@ -79,5 +84,18 @@ public class StartScreenCode : MonoBehaviour
     public void goBackFromControls()
     {
         gameControls.SetActive(false);
+    }
+
+    // Toggle For The 'No Dead Bodies' Option:
+    public void noDeadBodiesOption()
+    {
+        if (startNDBMToggle.isOn)
+        {
+            startDeadBodiesShown = false;
+        }
+        else
+        {
+            startDeadBodiesShown = true;
+        }
     }
 }

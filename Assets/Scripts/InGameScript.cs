@@ -23,6 +23,15 @@ public class InGameScript : MonoBehaviour
     [SerializeField]
     Toggle deadBodiesToggle;
 
+    [SerializeField]
+    AudioSource backgroundMusic;
+
+    [SerializeField]
+    Toggle muteMusic;
+
+    [SerializeField]
+    Slider volumeSlider;
+
     public bool deadBodiesShown = true;
 
     public bool deathScreenTrigger = false;
@@ -40,6 +49,8 @@ public class InGameScript : MonoBehaviour
         deathScreen.SetActive(false);
         isMenuUp = false;
         isWindowUp = false;
+
+        volumeSlider.value = backgroundMusic.volume;
     }
 
     // Update is called once per frame
@@ -136,5 +147,24 @@ public class InGameScript : MonoBehaviour
         {
             deadBodiesShown = true;
         }
+    }
+
+    // Toggle For Background Music:
+    public void MuteBGM()
+    {
+        if (backgroundMusic.isPlaying)
+        {
+            backgroundMusic.Stop();
+        }
+        else
+        {
+            backgroundMusic.Play();
+        }
+    }
+
+    // Volume Slider:
+    public void VolumeChange()
+    {
+        backgroundMusic.volume = volumeSlider.value;
     }
 }
