@@ -12,21 +12,12 @@ public class StartScreenCode : MonoBehaviour
     public GameObject loadGame;
 
     [SerializeField]
-    public GameObject gameOptions;
-
-    [SerializeField]
     public GameObject gameControls;
-
-    [SerializeField]
-    Toggle startNDBMToggle;
-
-    public bool startDeadBodiesShown;
 
     // Start Function:
     void Start()
     {
         loadGame.SetActive(false);
-        gameOptions.SetActive(false);
         gameControls.SetActive(false);
     }
 
@@ -40,12 +31,6 @@ public class StartScreenCode : MonoBehaviour
     public void loadGameButton()
     {
         loadGame.SetActive(true);
-    }
-
-    // Game Options Button:
-    public void gameOptionsButton()
-    {
-        gameOptions.SetActive(true);
     }
 
     // Game Controls Button:
@@ -74,28 +59,9 @@ public class StartScreenCode : MonoBehaviour
         loadGame.SetActive(false);
     }
 
-    // The 'go back' Button For The Settings Pop-Up:
-    public void goBackFromSettings()
-    {
-        gameOptions.SetActive(false);
-    }
-
     // The 'go back' Button For The Controls Pop-Up:
     public void goBackFromControls()
     {
         gameControls.SetActive(false);
-    }
-
-    // Toggle For The 'No Dead Bodies' Option:
-    public void noDeadBodiesOption()
-    {
-        if (startNDBMToggle.isOn)
-        {
-            startDeadBodiesShown = false;
-        }
-        else
-        {
-            startDeadBodiesShown = true;
-        }
     }
 }
