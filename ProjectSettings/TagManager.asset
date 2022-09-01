@@ -12,6 +12,8 @@ TagManager:
   - water
   - food
   - firstNDBMToggle
+  - paper
+  - nest
   layers:
   - Default
   - TransparentFX

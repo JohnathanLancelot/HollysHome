@@ -36,6 +36,12 @@ public class InGameScript : MonoBehaviour
     AudioSource mouseTrapSFX;
 
     [SerializeField]
+    AudioSource paperSFX;
+
+    [SerializeField]
+    AudioSource nestingSFX;
+
+    [SerializeField]
     Toggle muteMusic;
 
     [SerializeField]
@@ -67,11 +73,15 @@ public class InGameScript : MonoBehaviour
         eatingSFX.Stop();
         drinkingSFX.Stop();
         mouseTrapSFX.Stop();
+        paperSFX.Stop();
+        nestingSFX.Stop();
 
         volumeSlider.value = backgroundMusic.volume;
         eatingSFX.volume = volumeSlider.value;
         drinkingSFX.volume = volumeSlider.value;
         mouseTrapSFX.volume = volumeSlider.value;
+        paperSFX.volume = volumeSlider.value;
+        nestingSFX.volume = volumeSlider.value;
     }
 
     // Update is called once per frame
@@ -192,6 +202,8 @@ public class InGameScript : MonoBehaviour
             eatingSFX.volume = volumeSlider.value;
             drinkingSFX.volume = volumeSlider.value;
             mouseTrapSFX.volume = volumeSlider.value;
+            paperSFX.volume = volumeSlider.value;
+            nestingSFX.volume = volumeSlider.value;
         }
         else
         {
@@ -199,6 +211,8 @@ public class InGameScript : MonoBehaviour
             eatingSFX.volume = 0;
             drinkingSFX.volume = 0;
             mouseTrapSFX.volume = 0;
+            paperSFX.volume = 0;
+            nestingSFX.volume = 0;
         }
     }
 
@@ -212,6 +226,8 @@ public class InGameScript : MonoBehaviour
             eatingSFX.volume = volumeSlider.value;
             drinkingSFX.volume = volumeSlider.value;
             mouseTrapSFX.volume = volumeSlider.value;
+            paperSFX.volume = volumeSlider.value;
+            nestingSFX.volume = volumeSlider.value;
         }
     }
 }

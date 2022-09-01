@@ -19,7 +19,42 @@ public class Mouse : MonoBehaviour
     public AudioSource drinkingSFX;
 
     [SerializeField]
+    public AudioSource paperPickUpSFX;
+
+    [SerializeField]
+    public AudioSource nestingSFX;
+
+    [SerializeField]
     public GameObject riggedMouse;
+
+    [SerializeField]
+    public GameObject paper;
+
+    [SerializeField]
+    public MeshRenderer transparentMaterial;
+
+    [SerializeField]
+    public MeshRenderer paperMaterial;
+
+    // Accessing materials for all 5 nest pieces:
+    [SerializeField]
+    private MeshRenderer nestMat1;
+
+    [SerializeField]
+    private MeshRenderer nestMat2;
+
+    [SerializeField]
+    private MeshRenderer nestMat3;
+
+    [SerializeField]
+    private MeshRenderer nestMat4;
+
+    [SerializeField]
+    private MeshRenderer nestMat5;
+
+    // Reference Material (Pillow):
+    [SerializeField]
+    private MeshRenderer pillowMat;
 
     private Animator mouse;
 
@@ -32,6 +67,15 @@ public class Mouse : MonoBehaviour
 
     // Boolean determining if the mouse should be dead:
     public bool isDead = false;
+
+    // Boolean showing if the mouse is carrying paper:
+    public bool hasPaper = false;
+
+    // Boolean showing if the paper is present in the environment:
+    public bool paperPresent = true;
+
+    // The stage of nest creation (0 - 5):
+    public int nestStage;
 
     //[SerializeField]
     //Transform mouseTransform;
@@ -64,6 +108,8 @@ public class Mouse : MonoBehaviour
         mouseController = GetComponent<CharacterController>();
         inGameScript = FindObjectOfType<InGameScript>();
         hudScript = FindObjectOfType<HUDScript>();
+        paper = GetComponent<GameObject>();
+        nestStage = 0;
     }
 
     // Update is called once per frame
@@ -223,6 +269,62 @@ public class Mouse : MonoBehaviour
             if (!inGameScript.soundEffectsMuted)
             {
                 eatingSFX.Play();
+            }
+        }
+        else if (other.gameObject.tag == "paper")
+        {
+            if (paperPresent)
+            {
+                // Change hasPaper to true and paperPresent to false:
+                hasPaper = true;
+                paperPresent = false;
+
+                // Play the paper SFX:
+                if (!inGameScript.soundEffectsMuted)
+                {
+                    paperPickUpSFX.Play();
+                }
+
+                // Make the paper disappear:
+                paperMaterial.material = transparentMaterial.material;
+            }
+        }
+        else if (other.gameObject.tag == "nest")
+        {
+            if (hasPaper)
+            {
+                // Change hasPaper to false:
+                hasPaper = false;
+
+                // Play the nesting SFX:
+                if (!inGameScript.soundEffectsMuted)
+                {
+                    nestingSFX.Play();
+                }
+
+                // Increase the stage of nest development:
+                nestStage += 1;
+
+                // Depending on the stage of nest development, determine which new part of the nest
+                // to make visible:
+                switch (nestStage)
+                {
+                    case 1:
+                        nestMat1.material = pillowMat.material;
+                        break;
+                    case 2:
+                        nestMat2.material = pillowMat.material;
+                        break;
+                    case 3:
+                        nestMat3.material = pillowMat.material;
+                        break;
+                    case 4:
+                        nestMat4.material = pillowMat.material;
+                        break;
+                    case 5:
+                        nestMat5.material = pillowMat.material;
+                        break;
+                }
             }
         }
     }
