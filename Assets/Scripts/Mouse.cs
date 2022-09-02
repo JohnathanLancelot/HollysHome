@@ -68,6 +68,9 @@ public class Mouse : MonoBehaviour
     // Boolean determining if the mouse should be dead:
     public bool isDead = false;
 
+    // Boolean for if the win condition has been met:
+    public bool hasWon = false;
+
     // Boolean showing if the mouse is carrying paper:
     public bool hasPaper = false;
 
@@ -119,7 +122,7 @@ public class Mouse : MonoBehaviour
         // Might make things less jittery:
         moveDir.Normalize();
 
-        if ((!isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
+        if ((!isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp) && (!hasWon))
         {
             // Actually moves the mouse:
             transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
@@ -134,14 +137,14 @@ public class Mouse : MonoBehaviour
         //    velocity.y = -2.0f;
         //}
 
-        if ((inGameScript.isMenuUp) || (inGameScript.isWindowUp))
+        if ((inGameScript.isMenuUp) || (inGameScript.isWindowUp) || (hasWon))
         {
             mouse.SetBool("run", false);
             mouse.SetBool("jump", false);
             mouse.SetBool("idle", true);
         }
 
-        if (isDead == false)
+        if ((isDead == false) & (hasWon == false))
         {
             if ((!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
             {
@@ -195,7 +198,7 @@ public class Mouse : MonoBehaviour
                 }
             }
         }
-        else
+        else if (isDead == true)
         {
             // Check if 'no dead bodies mode' is enabled:
             if (inGameScript.deadBodiesShown)

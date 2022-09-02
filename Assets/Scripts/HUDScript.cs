@@ -28,9 +28,21 @@ public class HUDScript : MonoBehaviour
     Mouse mouseScript;
     InGameScript inGameScript;
 
+    [SerializeField]
+    GameObject winningScreen;
+
+    // Access the text on the winning screen to change the nesting percentage:
+    [SerializeField]
+    TextMeshProUGUI nestPercent;
+
+    public bool winScreenTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
+        winningScreen.SetActive(false);
+        winScreenTrigger = false;
+
         hungerAmount = 1;
         thirstAmount = 1;
         dayAmount = 1;
@@ -72,7 +84,7 @@ public class HUDScript : MonoBehaviour
 
         // Making hunger and thirst increase over time (shown as a dial decrease)
         // (Only if the menu isn't up, and only if the mouse isn't dead):
-        if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
+        if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp) && (!mouseScript.hasWon))
         {
             hungerAmount -= (0.1f * Time.deltaTime) / 2;
             thirstAmount -= (0.1f * Time.deltaTime) / 2;
@@ -87,7 +99,7 @@ public class HUDScript : MonoBehaviour
         // Making the day amount go down over time, leading to a new day:
         day.fillAmount = dayAmount;
 
-        if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
+        if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp) && (!mouseScript.hasWon))
         {
             dayAmount -= (0.1f * Time.deltaTime) / 3;
         }
@@ -110,6 +122,42 @@ public class HUDScript : MonoBehaviour
             else if (currentDayInt == 4)
             {
                 SceneManager.LoadScene(5);
+            }
+            else if (currentDayInt == 5)
+            {
+                mouseScript.hasWon = true;
+
+                winningScreen.SetActive(true);
+
+                // Show how far the user got in building the nest:
+                switch (PlayerPrefs.GetInt("NestingStage"))
+                {
+                    case 0:
+                        nestPercent.text = "Nest 0% Complete.";
+                        break;
+                    case 1:
+                        nestPercent.text = "Nest 20% Complete.";
+                        break;
+                    case 2:
+                        nestPercent.text = "Nest 40% Complete.";
+                        break;
+                    case 3:
+                        nestPercent.text = "Nest 60% Complete.";
+                        break;
+                    case 4:
+                        nestPercent.text = "Nest 80% Complete.";
+                        break;
+                    case 5:
+                        nestPercent.text = "Nest 100% Complete. Well done!";
+                        break;
+                }
+
+                // Allow the user to exit:
+                if (Input.GetKeyDown(KeyCode.X))
+                {
+                    Debug.Log("EXIT");
+                    Application.Quit();
+                }
             }
         }
     }
