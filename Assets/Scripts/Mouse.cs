@@ -74,9 +74,6 @@ public class Mouse : MonoBehaviour
     // Boolean showing if the paper is present in the environment:
     public bool paperPresent = true;
 
-    // The stage of nest creation (0 - 5):
-    public int nestStage;
-
     //[SerializeField]
     //Transform mouseTransform;
 
@@ -109,7 +106,6 @@ public class Mouse : MonoBehaviour
         inGameScript = FindObjectOfType<InGameScript>();
         hudScript = FindObjectOfType<HUDScript>();
         paper = GetComponent<GameObject>();
-        nestStage = 0;
     }
 
     // Update is called once per frame
@@ -127,6 +123,7 @@ public class Mouse : MonoBehaviour
         {
             // Actually moves the mouse:
             transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
+            //mouseController.Move(moveDir * moveSpeed * Time.deltaTime);
         }
 
         // Jumping:
@@ -148,11 +145,13 @@ public class Mouse : MonoBehaviour
         {
             if ((!inGameScript.isMenuUp) && (!inGameScript.isWindowUp))
             {
+                // If the mouse is moving:
                 if (moveDir != Vector3.zero)
                 {
                     // Points the mouse in the right direction:
                     transform.forward = moveDir;
 
+                    // If space is not being pressed:
                     if (!Input.GetKeyDown(KeyCode.Space))
                     {
                         // Running animation:
@@ -160,6 +159,7 @@ public class Mouse : MonoBehaviour
                         mouse.SetBool("idle", false);
                         mouse.SetBool("jump", false);
                     }
+                    // If space is being pressed:
                     else
                     {
                         //if (isGrounded)
@@ -173,6 +173,7 @@ public class Mouse : MonoBehaviour
                         mouse.SetBool("run", false);
                     }
                 }
+                // If the mouse is not moving:
                 else
                 {
                     if (!Input.GetKeyDown(KeyCode.Space))
@@ -217,26 +218,36 @@ public class Mouse : MonoBehaviour
         // More for jumping:
         //velocity.y += gravity * Time.deltaTime;
 
- 
-        //    if (Input.GetKey(KeyCode.E))
-        //    {
-        //        mouse.SetBool("eat", true);
-        //        mouse.SetBool("idle", false);
-        //        mouse.SetBool("walk", false);
-        //        mouse.SetBool("run", false);
-        //    }
-        //    if (Input.GetKeyUp(KeyCode.E))
-        //    {
-        //        mouse.SetBool("idle", true);
-        //        mouse.SetBool("eat", false);
-        //    }
-        //    if (Input.GetKey(KeyCode.K))
-        //    {
-        //        mouse.SetBool("death", true);
-        //        mouse.SetBool("idle", false);
-        //        mouse.SetBool("walk", false);
-        //        mouse.SetBool("run", false);
-        //    }
+        // Depending on the stage of nest development, determine which parts of the nest
+        // should be visible:
+        switch (PlayerPrefs.GetInt("NestingStage"))
+        {
+            case 1:
+                nestMat1.material = pillowMat.material;
+                break;
+            case 2:
+                nestMat1.material = pillowMat.material;
+                nestMat2.material = pillowMat.material;
+                break;
+            case 3:
+                nestMat1.material = pillowMat.material;
+                nestMat2.material = pillowMat.material;
+                nestMat3.material = pillowMat.material;
+                break;
+            case 4:
+                nestMat1.material = pillowMat.material;
+                nestMat2.material = pillowMat.material;
+                nestMat3.material = pillowMat.material;
+                nestMat4.material = pillowMat.material;
+                break;
+            case 5:
+                nestMat1.material = pillowMat.material;
+                nestMat2.material = pillowMat.material;
+                nestMat3.material = pillowMat.material;
+                nestMat4.material = pillowMat.material;
+                nestMat5.material = pillowMat.material;
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -303,11 +314,11 @@ public class Mouse : MonoBehaviour
                 }
 
                 // Increase the stage of nest development:
-                nestStage += 1;
+                PlayerPrefs.SetInt("NestingStage", (PlayerPrefs.GetInt("NestingStage") + 1));
 
                 // Depending on the stage of nest development, determine which new part of the nest
                 // to make visible:
-                switch (nestStage)
+                switch (PlayerPrefs.GetInt("NestingStage"))
                 {
                     case 1:
                         nestMat1.material = pillowMat.material;

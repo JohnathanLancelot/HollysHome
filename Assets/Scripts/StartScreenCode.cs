@@ -14,11 +14,17 @@ public class StartScreenCode : MonoBehaviour
     [SerializeField]
     public GameObject gameControls;
 
+    // The stage of nest creation (0 - 5):
+    public int nestStage;
+
     // Start Function:
     void Start()
     {
         loadGame.SetActive(false);
         gameControls.SetActive(false);
+
+        nestStage = 0;
+        PlayerPrefs.SetInt("NestingStage", 0);
     }
 
     // New Game Button:
