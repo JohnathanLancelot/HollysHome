@@ -50,7 +50,7 @@ public class InGameScript : MonoBehaviour
     [SerializeField]
     Slider volumeSlider;
 
-    public bool deadBodiesShown = true;
+    public bool deadBodiesShown;
 
     public bool deathScreenTrigger = false;
 
@@ -58,11 +58,19 @@ public class InGameScript : MonoBehaviour
 
     public bool isWindowUp;
 
-    public bool soundEffectsMuted = false;
+    public bool soundEffectsMuted;
+
+    // A boolean for when toggles are changed by the code, not by the user
+    // (e.g. to make settings consistent across days):
+    bool backgroundToggleChange;
+
+    HUDScript hud;
 
     // Start is called before the first frame update
     void Start()
     {
+        hud = FindObjectOfType<HUDScript>();
+
         menuScreen.SetActive(false);
         controlsScreen.SetActive(false);
         optionsScreen.SetActive(false);
@@ -76,12 +84,75 @@ public class InGameScript : MonoBehaviour
         paperSFX.Stop();
         nestingSFX.Stop();
 
-        volumeSlider.value = backgroundMusic.volume;
-        eatingSFX.volume = volumeSlider.value;
-        drinkingSFX.volume = volumeSlider.value;
-        mouseTrapSFX.volume = volumeSlider.value;
-        paperSFX.volume = volumeSlider.value;
-        nestingSFX.volume = volumeSlider.value;
+        // If it is day 1, the player won't have touched the slider or toggles yet,
+        // but if it is day 2 or onwards, we want to get these values from PlayerPrefs:
+        if (hud.currentDayInt == 1)
+        {
+            volumeSlider.value = backgroundMusic.volume;
+            eatingSFX.volume = volumeSlider.value;
+            drinkingSFX.volume = volumeSlider.value;
+            mouseTrapSFX.volume = volumeSlider.value;
+            paperSFX.volume = volumeSlider.value;
+            nestingSFX.volume = volumeSlider.value;
+            soundEffectsMuted = false;
+            deadBodiesShown = true;
+            backgroundMusic.Play();
+            backgroundToggleChange = false;
+
+            // Save these to Player Prefs (1 = true, 0 = false for booleans) so that these default settings carry
+            // across different days, if not changed in-game:
+            PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+            PlayerPrefs.SetInt("SFX", 1);
+            PlayerPrefs.SetInt("BackgroundMusic", 1);
+            PlayerPrefs.SetInt("DeadBodies", 1);
+        }
+        else
+        {
+            volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+            backgroundMusic.volume = volumeSlider.value;
+            eatingSFX.volume = volumeSlider.value;
+            drinkingSFX.volume = volumeSlider.value;
+            mouseTrapSFX.volume = volumeSlider.value;
+            paperSFX.volume = volumeSlider.value;
+            nestingSFX.volume = volumeSlider.value;
+            backgroundToggleChange = true;
+
+            // See if the background music should be muted:
+            if (PlayerPrefs.GetInt("BackgroundMusic") == 1)
+            {
+                backgroundMusic.Play();
+                muteMusic.isOn = false;
+            }
+            else
+            {
+                backgroundMusic.Stop();
+                muteMusic.isOn = true;
+            }
+
+            // See if the sound effects should be muted:
+            if (PlayerPrefs.GetInt("SFX") == 1)
+            {
+                soundEffectsMuted = false;
+                muteSFX.isOn = false;
+            }
+            else
+            {
+                soundEffectsMuted = true;
+                muteSFX.isOn = true;
+            }
+
+            // See if no dead bodies mode should be on:
+            if (PlayerPrefs.GetInt("DeadBodies") == 1)
+            {
+                deadBodiesShown = true;
+                deadBodiesToggle.isOn = false;
+            }
+            else
+            {
+                deadBodiesShown = false;
+                deadBodiesToggle.isOn = true;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -170,49 +241,78 @@ public class InGameScript : MonoBehaviour
     // Toggle For The 'No Dead Bodies' Option:
     public void noDeadBodiesOption()
     {
-        if (deadBodiesToggle.isOn)
+        // First check if it was a background change, and if so
+        // change the boolean back to false and do nothing else:
+        if (backgroundToggleChange)
         {
-            deadBodiesShown = false;
+            backgroundToggleChange = false;
         }
         else
         {
-            deadBodiesShown = true;
+            if (deadBodiesToggle.isOn)
+            {
+                deadBodiesShown = false;
+                PlayerPrefs.SetInt("DeadBodies", 0);
+            }
+            else
+            {
+                deadBodiesShown = true;
+                PlayerPrefs.SetInt("DeadBodies", 1);
+            }
         }
     }
 
     // Toggle For Background Music:
     public void MuteBGM()
     {
-        if (backgroundMusic.isPlaying)
+        if (backgroundToggleChange)
         {
-            backgroundMusic.Stop();
+            backgroundToggleChange = false;
         }
         else
         {
-            backgroundMusic.Play();
+            if (backgroundMusic.isPlaying)
+            {
+                backgroundMusic.Stop();
+                PlayerPrefs.SetInt("BackgroundMusic", 0);
+            }
+            else
+            {
+                backgroundMusic.Play();
+                PlayerPrefs.SetInt("BackgroundMusic", 1);
+            }
         }
     }
 
     // Toggle For SFX:
     public void MuteSFX()
     {
-        if (soundEffectsMuted)
+        if (backgroundToggleChange)
         {
-            soundEffectsMuted = false;
-            eatingSFX.volume = volumeSlider.value;
-            drinkingSFX.volume = volumeSlider.value;
-            mouseTrapSFX.volume = volumeSlider.value;
-            paperSFX.volume = volumeSlider.value;
-            nestingSFX.volume = volumeSlider.value;
+            backgroundToggleChange = false;
         }
         else
         {
-            soundEffectsMuted = true;
-            eatingSFX.volume = 0;
-            drinkingSFX.volume = 0;
-            mouseTrapSFX.volume = 0;
-            paperSFX.volume = 0;
-            nestingSFX.volume = 0;
+            if (soundEffectsMuted)
+            {
+                soundEffectsMuted = false;
+                eatingSFX.volume = volumeSlider.value;
+                drinkingSFX.volume = volumeSlider.value;
+                mouseTrapSFX.volume = volumeSlider.value;
+                paperSFX.volume = volumeSlider.value;
+                nestingSFX.volume = volumeSlider.value;
+                PlayerPrefs.SetInt("SFX", 1);
+            }
+            else
+            {
+                soundEffectsMuted = true;
+                eatingSFX.volume = 0;
+                drinkingSFX.volume = 0;
+                mouseTrapSFX.volume = 0;
+                paperSFX.volume = 0;
+                nestingSFX.volume = 0;
+                PlayerPrefs.SetInt("SFX", 0);
+            }
         }
     }
 
@@ -220,6 +320,9 @@ public class InGameScript : MonoBehaviour
     public void VolumeChange()
     {
         backgroundMusic.volume = volumeSlider.value;
+
+        // Save this value so that it stays the same across days:
+        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
 
         if (!soundEffectsMuted)
         {
