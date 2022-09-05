@@ -1009,10 +1009,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadGame: {fileID: 1418248810}
-  gameOptions: {fileID: 0}
   gameControls: {fileID: 584244339668644951}
-  startNDBMToggle: {fileID: 0}
-  startDeadBodiesShown: 1
+  lastSaved: {fileID: 1418248811}
+  nestStage: 0
 --- !u!1 &1121874624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,6 +1507,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 460917914567341663, guid: 5919f08ac13d02346843a05c6792eb00, type: 3}
   m_PrefabInstance: {fileID: 1418248809}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1418248811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 460917914021221766, guid: 5919f08ac13d02346843a05c6792eb00, type: 3}
+  m_PrefabInstance: {fileID: 1418248809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1545999059
 GameObject:
   m_ObjectHideFlags: 0

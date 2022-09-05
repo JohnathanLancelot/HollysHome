@@ -208,6 +208,16 @@ public class InGameScript : MonoBehaviour
     // In-Game Menu's Exit Button:
     public void exitGame()
     {
+        // Use the save slot to save the game:
+        PlayerPrefs.SetInt("SlotFilled", 1);
+
+        // Get the current date for use on the home screen's load menu:
+        System.DateTime date = System.DateTime.Now;
+        date = date.Add(System.TimeSpan.FromDays(0.00000000000001));
+        string dateString = date.ToString("yyyy-MM-dd");
+
+        PlayerPrefs.SetString("LastSaved", dateString);
+
         Debug.Log("EXIT");
         Application.Quit();
     }

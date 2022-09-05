@@ -14,6 +14,9 @@ public class StartScreenCode : MonoBehaviour
     [SerializeField]
     public GameObject gameControls;
 
+    [SerializeField]
+    public TextMeshProUGUI lastSaved;
+
     // The stage of nest creation (0 - 5):
     public int nestStage;
 
@@ -37,6 +40,17 @@ public class StartScreenCode : MonoBehaviour
     public void loadGameButton()
     {
         loadGame.SetActive(true);
+
+        // If there is a save file ready:
+        if (PlayerPrefs.GetInt("SlotFilled") == 1)
+        {
+            // Tell the user when the game was last saved:
+            lastSaved.text = PlayerPrefs.GetString("LastSaved");
+        }
+        else
+        {
+            lastSaved.text = "No saved game on file.";
+        }
     }
 
     // Game Controls Button:
@@ -55,8 +69,12 @@ public class StartScreenCode : MonoBehaviour
     // Yes Button In Load Screen:
     public void yesLoadButton()
     {
-        loadGame.SetActive(false);
-        SceneManager.LoadScene(1);
+        // If there is a save file ready:
+        if (PlayerPrefs.GetInt("SlotFilled") == 1)
+        {
+            loadGame.SetActive(false);
+            SceneManager.LoadScene(1);
+        }
     }
 
     // No Button In Load Screen:
