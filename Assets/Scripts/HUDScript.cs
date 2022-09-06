@@ -48,8 +48,12 @@ public class HUDScript : MonoBehaviour
         dayAmount = 1;
         currentDay = dayNumber.text;
 
+        mouseScript = FindObjectOfType<Mouse>();
+        inGameScript = FindObjectOfType<InGameScript>();
+
         // Convert the day number text into an integer so we can use it
-        // to call the next scene:
+        // to call the next scene. Also send the day number to the in-game script
+        // so it can be used to save the user's progress:
         if (currentDay == "Day 1")
         {
             currentDayInt = 1;
@@ -71,8 +75,7 @@ public class HUDScript : MonoBehaviour
             currentDayInt = 5;
         }
 
-        mouseScript = FindObjectOfType<Mouse>();
-        inGameScript = FindObjectOfType<InGameScript>();
+        inGameScript.currentDayInt = currentDayInt;
     }
 
     // Update is called once per frame

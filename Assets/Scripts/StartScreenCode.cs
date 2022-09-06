@@ -73,7 +73,27 @@ public class StartScreenCode : MonoBehaviour
         if (PlayerPrefs.GetInt("SlotFilled") == 1)
         {
             loadGame.SetActive(false);
-            SceneManager.LoadScene(1);
+
+            // Based on what day the player was in when they last saved,
+            // load the appropriate day:
+            switch (PlayerPrefs.GetInt("DaySaved"))
+            {
+                case 1:
+                    SceneManager.LoadScene(1);
+                    break;
+                case 2:
+                    SceneManager.LoadScene(2);
+                    break;
+                case 3:
+                    SceneManager.LoadScene(3);
+                    break;
+                case 4:
+                    SceneManager.LoadScene(4);
+                    break;
+                case 5:
+                    SceneManager.LoadScene(5);
+                    break;
+            }
         }
     }
 

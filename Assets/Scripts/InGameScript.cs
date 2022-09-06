@@ -60,6 +60,8 @@ public class InGameScript : MonoBehaviour
 
     public bool soundEffectsMuted;
 
+    public int currentDayInt;
+
     // A boolean for when toggles are changed by the code, not by the user
     // (e.g. to make settings consistent across days):
     bool backgroundToggleChange;
@@ -216,8 +218,13 @@ public class InGameScript : MonoBehaviour
         date = date.Add(System.TimeSpan.FromDays(0.00000000000001));
         string dateString = date.ToString("yyyy-MM-dd");
 
+        // Save the date for later use:
         PlayerPrefs.SetString("LastSaved", dateString);
 
+        // Save the day the user was in when they quit:
+        PlayerPrefs.SetInt("DaySaved", currentDayInt);
+
+        // Exit the program:
         Debug.Log("EXIT");
         Application.Quit();
     }
