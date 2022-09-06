@@ -43,10 +43,6 @@ public class HUDScript : MonoBehaviour
         winningScreen.SetActive(false);
         winScreenTrigger = false;
 
-        hungerAmount = PlayerPrefs.GetFloat("SavedHunger");
-        thirstAmount = PlayerPrefs.GetFloat("SavedThirst");
-        dayAmount = PlayerPrefs.GetFloat("SavedDayAmount");
-
         currentDay = dayNumber.text;
 
         mouseScript = FindObjectOfType<Mouse>();
@@ -77,6 +73,38 @@ public class HUDScript : MonoBehaviour
         }
 
         inGameScript.currentDayInt = currentDayInt;
+
+        // Keep note of the current day, so it can be checked against
+        // the 'first day' of a saved game:
+        PlayerPrefs.SetInt("CurrentDay", currentDayInt);
+
+        // Find out if there is a save file available:
+        if ((PlayerPrefs.GetInt("SlotFilled")) == 1)
+        {
+            // Find out if a saved game is currently being loaded:
+            if ((PlayerPrefs.GetInt("LoadedGame")) == 1)
+            {
+                // Find out if this is NOT the starting "day" for the loaded game:
+                if ((PlayerPrefs.GetInt("CurrentDay")) != (PlayerPrefs.GetInt("DaySaved")))
+                {
+                    // If it isn't the starting day, reset the HUD values to 1:
+                    PlayerPrefs.SetFloat("SavedHunger", 1);
+                    PlayerPrefs.SetFloat("SavedThirst", 1);
+                    PlayerPrefs.SetFloat("SavedDayAmount", 1);
+                }
+                else
+                {
+                    // If this is the starting day, base the mouse's starting position
+                    // on the saved floats:
+                    mouseScript.transform.position = new Vector3((PlayerPrefs.GetFloat("XPosition")), (PlayerPrefs.GetFloat("YPosition")),
+                        (PlayerPrefs.GetFloat("ZPosition")));
+                }
+            }
+        }
+
+        hungerAmount = PlayerPrefs.GetFloat("SavedHunger");
+        thirstAmount = PlayerPrefs.GetFloat("SavedThirst");
+        dayAmount = PlayerPrefs.GetFloat("SavedDayAmount");
     }
 
     // Update is called once per frame

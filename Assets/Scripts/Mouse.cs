@@ -79,30 +79,9 @@ public class Mouse : MonoBehaviour
     // Boolean showing if the paper is present in the environment:
     public bool paperPresent = true;
 
-    //[SerializeField]
-    //Transform mouseTransform;
-
     float moveX;
 
     float moveZ;
-
-    // Jump Variables:
-    //[SerializeField]
-    //bool isGrounded;
-
-    //[SerializeField]
-    //float groundCheckDistance;
-
-    //[SerializeField]
-    //LayerMask groundLayerMask;
-
-    //[SerializeField]
-    //float gravity = -0.2f;
-
-    //[SerializeField]
-    //float jumpHeight = 0.03f;
-
-    //Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -112,23 +91,6 @@ public class Mouse : MonoBehaviour
         inGameScript = FindObjectOfType<InGameScript>();
         hudScript = FindObjectOfType<HUDScript>();
         paper = GetComponent<GameObject>();
-
-        // Find out if there is a save file available:
-        if ((PlayerPrefs.GetInt("SlotFilled")) == 1)
-        {
-            // Find out if a saved game is currently being loaded:
-            if ((PlayerPrefs.GetInt("LoadedGame")) == 1)
-            {
-                // Find out if this is the starting "day" for the loaded game:
-                if ((PlayerPrefs.GetInt("StartingDay")) == (PlayerPrefs.GetInt("DaySaved")))
-                {
-                    // If all these conditions are true, base the mouse's starting position
-                    // on the saved floats:
-                    transform.position = new Vector3((PlayerPrefs.GetFloat("XPosition")), (PlayerPrefs.GetFloat("YPosition")),
-                        (PlayerPrefs.GetFloat("ZPosition")));
-                }
-            }
-        }
     }
 
     // Update is called once per frame
@@ -153,14 +115,6 @@ public class Mouse : MonoBehaviour
             inGameScript.mouseY = transform.position.y;
             inGameScript.mouseZ = transform.position.z;
         }
-
-        // Jumping:
-        //isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundLayerMask);
-
-        //if (!isGrounded)
-        //{
-        //    velocity.y = -2.0f;
-        //}
 
         if ((inGameScript.isMenuUp) || (inGameScript.isWindowUp) || (hasWon))
         {
@@ -190,11 +144,6 @@ public class Mouse : MonoBehaviour
                     // If space is being pressed:
                     else
                     {
-                        //if (isGrounded)
-                        //{
-                        //    velocity.y = jumpHeight;
-                        //}
-
                         // Jumping animation
                         mouse.SetBool("jump", true);
                         mouse.SetBool("idle", false);
@@ -212,10 +161,6 @@ public class Mouse : MonoBehaviour
                     }
                     else
                     {
-                        //if (isGrounded)
-                        //{
-                        //    velocity.y = jumpHeight;
-                        //}
                         mouse.SetBool("jump", true);
                         mouse.SetBool("idle", false);
                         mouse.SetBool("run", false);
@@ -242,9 +187,6 @@ public class Mouse : MonoBehaviour
             // Make the death screen appear:
             inGameScript.deathScreenTrigger = true;
         }
-
-        // More for jumping:
-        //velocity.y += gravity * Time.deltaTime;
 
         // Depending on the stage of nest development, determine which parts of the nest
         // should be visible:

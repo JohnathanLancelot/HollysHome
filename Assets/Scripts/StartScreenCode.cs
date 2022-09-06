@@ -17,17 +17,11 @@ public class StartScreenCode : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI lastSaved;
 
-    // The stage of nest creation (0 - 5):
-    public int nestStage;
-
     // Start Function:
     void Start()
     {
         loadGame.SetActive(false);
         gameControls.SetActive(false);
-
-        nestStage = 0;
-        PlayerPrefs.SetInt("NestingStage", 0);
     }
 
     // New Game Button:
@@ -38,6 +32,9 @@ public class StartScreenCode : MonoBehaviour
         PlayerPrefs.SetFloat("SavedHunger", 1);
         PlayerPrefs.SetFloat("SavedThirst", 1);
         PlayerPrefs.SetFloat("SavedDayAmount", 1);
+
+        // Also reset the nesting stage back to 0:
+        PlayerPrefs.SetInt("NestingStage", 0);
 
         // Tell the mouse script that a previously-saved game
         // is not being used:
