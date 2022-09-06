@@ -6,6 +6,7 @@ using UnityEngine;
 public class Mouse : MonoBehaviour
 {
     public InGameScript inGameScript;
+
     public HUDScript hudScript;
 
     public GameObject mouseTrapAnim;
@@ -61,6 +62,7 @@ public class Mouse : MonoBehaviour
     CharacterController mouseController;
 
     public float moveSpeed = 1.3f;
+
     public float rotationSpeed = 720;
 
     public Vector3 direction;
@@ -81,6 +83,7 @@ public class Mouse : MonoBehaviour
     //Transform mouseTransform;
 
     float moveX;
+
     float moveZ;
 
     // Jump Variables:
@@ -109,6 +112,23 @@ public class Mouse : MonoBehaviour
         inGameScript = FindObjectOfType<InGameScript>();
         hudScript = FindObjectOfType<HUDScript>();
         paper = GetComponent<GameObject>();
+
+        // Find out if there is a save file available:
+        if ((PlayerPrefs.GetInt("SlotFilled")) == 1)
+        {
+            // Find out if a saved game is currently being loaded:
+            if ((PlayerPrefs.GetInt("LoadedGame")) == 1)
+            {
+                // Find out if this is the starting "day" for the loaded game:
+                if ((PlayerPrefs.GetInt("StartingDay")) == (PlayerPrefs.GetInt("DaySaved")))
+                {
+                    // If all these conditions are true, base the mouse's starting position
+                    // on the saved floats:
+                    transform.position = new Vector3((PlayerPrefs.GetFloat("XPosition")), (PlayerPrefs.GetFloat("YPosition")),
+                        (PlayerPrefs.GetFloat("ZPosition")));
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -127,6 +147,11 @@ public class Mouse : MonoBehaviour
             // Actually moves the mouse:
             transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
             //mouseController.Move(moveDir * moveSpeed * Time.deltaTime);
+
+            // Send the mouse's position to the in-game script for saving:
+            inGameScript.mouseX = transform.position.x;
+            inGameScript.mouseY = transform.position.y;
+            inGameScript.mouseZ = transform.position.z;
         }
 
         // Jumping:

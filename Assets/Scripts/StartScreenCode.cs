@@ -39,6 +39,10 @@ public class StartScreenCode : MonoBehaviour
         PlayerPrefs.SetFloat("SavedThirst", 1);
         PlayerPrefs.SetFloat("SavedDayAmount", 1);
 
+        // Tell the mouse script that a previously-saved game
+        // is not being used:
+        PlayerPrefs.SetInt("LoadedGame", 0);
+
         SceneManager.LoadScene(1);
     }
 
@@ -80,24 +84,32 @@ public class StartScreenCode : MonoBehaviour
         {
             loadGame.SetActive(false);
 
+            // Set the saved "boolean" for whether we are using a loaded game to true:
+            PlayerPrefs.SetInt("LoadedGame", 1);
+
             // Based on what day the player was in when they last saved,
-            // load the appropriate day:
+            // load the appropriate day and save it as the "starting day":
             switch (PlayerPrefs.GetInt("DaySaved"))
             {
                 case 1:
                     SceneManager.LoadScene(1);
+                    PlayerPrefs.SetInt("StartingDay", 1);
                     break;
                 case 2:
                     SceneManager.LoadScene(2);
+                    PlayerPrefs.SetInt("StartingDay", 2);
                     break;
                 case 3:
                     SceneManager.LoadScene(3);
+                    PlayerPrefs.SetInt("StartingDay", 3);
                     break;
                 case 4:
                     SceneManager.LoadScene(4);
+                    PlayerPrefs.SetInt("StartingDay", 4);
                     break;
                 case 5:
                     SceneManager.LoadScene(5);
+                    PlayerPrefs.SetInt("StartingDay", 5);
                     break;
             }
         }

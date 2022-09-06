@@ -60,7 +60,7 @@ public class InGameScript : MonoBehaviour
 
     public bool soundEffectsMuted;
 
-    // Variables (values passed from HUD) for game saving:
+    // Variables (values passed from HUD and Mouse) for game saving:
     public int currentDayInt;
 
     public float hungerLevel;
@@ -68,6 +68,12 @@ public class InGameScript : MonoBehaviour
     public float thirstLevel;
 
     public float dayLevel;
+
+    public float mouseX;
+
+    public float mouseY;
+
+    public float mouseZ;
 
     // A boolean for when toggles are changed by the code, not by the user
     // (e.g. to make settings consistent across days):
@@ -235,6 +241,11 @@ public class InGameScript : MonoBehaviour
         PlayerPrefs.SetFloat("SavedHunger", hungerLevel);
         PlayerPrefs.SetFloat("SavedThirst", thirstLevel);
         PlayerPrefs.SetFloat("SavedDayAmount", dayLevel);
+
+        // Save the mouse's position:
+        PlayerPrefs.SetFloat("XPosition", mouseX);
+        PlayerPrefs.SetFloat("YPosition", mouseY);
+        PlayerPrefs.SetFloat("ZPosition", mouseZ);
 
         // Exit the program:
         Debug.Log("EXIT");
