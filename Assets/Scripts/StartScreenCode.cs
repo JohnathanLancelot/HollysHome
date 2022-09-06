@@ -33,6 +33,12 @@ public class StartScreenCode : MonoBehaviour
     // New Game Button:
     public void newGameButton()
     {
+        // If a new game is started, reset the hunger, thirst
+        // and day levels:
+        PlayerPrefs.SetFloat("SavedHunger", 1);
+        PlayerPrefs.SetFloat("SavedThirst", 1);
+        PlayerPrefs.SetFloat("SavedDayAmount", 1);
+
         SceneManager.LoadScene(1);
     }
 

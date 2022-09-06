@@ -60,7 +60,14 @@ public class InGameScript : MonoBehaviour
 
     public bool soundEffectsMuted;
 
+    // Variables (values passed from HUD) for game saving:
     public int currentDayInt;
+
+    public float hungerLevel;
+
+    public float thirstLevel;
+
+    public float dayLevel;
 
     // A boolean for when toggles are changed by the code, not by the user
     // (e.g. to make settings consistent across days):
@@ -223,6 +230,11 @@ public class InGameScript : MonoBehaviour
 
         // Save the day the user was in when they quit:
         PlayerPrefs.SetInt("DaySaved", currentDayInt);
+
+        // Save the hunger, thirst and day levels:
+        PlayerPrefs.SetFloat("SavedHunger", hungerLevel);
+        PlayerPrefs.SetFloat("SavedThirst", thirstLevel);
+        PlayerPrefs.SetFloat("SavedDayAmount", dayLevel);
 
         // Exit the program:
         Debug.Log("EXIT");

@@ -43,9 +43,10 @@ public class HUDScript : MonoBehaviour
         winningScreen.SetActive(false);
         winScreenTrigger = false;
 
-        hungerAmount = 1;
-        thirstAmount = 1;
-        dayAmount = 1;
+        hungerAmount = PlayerPrefs.GetFloat("SavedHunger");
+        thirstAmount = PlayerPrefs.GetFloat("SavedThirst");
+        dayAmount = PlayerPrefs.GetFloat("SavedDayAmount");
+
         currentDay = dayNumber.text;
 
         mouseScript = FindObjectOfType<Mouse>();
@@ -85,6 +86,10 @@ public class HUDScript : MonoBehaviour
         hunger.fillAmount = hungerAmount;
         thirst.fillAmount = thirstAmount;
 
+        // Pass these values to the in-game script for saving purposes:
+        inGameScript.hungerLevel = hungerAmount;
+        inGameScript.thirstLevel = thirstAmount;
+
         // Making hunger and thirst increase over time (shown as a dial decrease)
         // (Only if the menu isn't up, and only if the mouse isn't dead):
         if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp) && (!mouseScript.hasWon))
@@ -101,6 +106,9 @@ public class HUDScript : MonoBehaviour
 
         // Making the day amount go down over time, leading to a new day:
         day.fillAmount = dayAmount;
+
+        // Pass this value to the in-game script for saving purposes:
+        inGameScript.dayLevel = dayAmount;
 
         if ((!mouseScript.isDead) && (!inGameScript.isMenuUp) && (!inGameScript.isWindowUp) && (!mouseScript.hasWon))
         {
