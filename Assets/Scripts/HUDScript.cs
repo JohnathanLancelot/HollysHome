@@ -91,6 +91,15 @@ public class HUDScript : MonoBehaviour
                     PlayerPrefs.SetFloat("SavedHunger", 1);
                     PlayerPrefs.SetFloat("SavedThirst", 1);
                     PlayerPrefs.SetFloat("SavedDayAmount", 1);
+
+                    // If it isn't the starting day, reset the paper booleans so the paper hasn't been
+                    // picked up yet:
+                    PlayerPrefs.SetInt("HasPaper", 0);
+                    PlayerPrefs.SetInt("PaperPresent", 1);
+
+                    // Send these values to the mouse script:
+                    mouseScript.hasPaper = false;
+                    mouseScript.paperPresent = true;
                 }
                 else
                 {
@@ -98,8 +107,39 @@ public class HUDScript : MonoBehaviour
                     // on the saved floats:
                     mouseScript.transform.position = new Vector3((PlayerPrefs.GetFloat("XPosition")), (PlayerPrefs.GetFloat("YPosition")),
                         (PlayerPrefs.GetFloat("ZPosition")));
+
+                    // Base the paper booleans on the saved data:
+                    if (PlayerPrefs.GetInt("HasPaper") == 0)
+                    {
+                        mouseScript.hasPaper = false;
+                    }
+                    else if (PlayerPrefs.GetInt("HasPaper") == 1)
+                    {
+                        mouseScript.hasPaper = true;
+                    }
+
+                    if (PlayerPrefs.GetInt("paperPresent") == 0)
+                    {
+                        mouseScript.paperPresent = false;
+                    }
+                    else if (PlayerPrefs.GetInt("paperPresent") == 1)
+                    {
+                        mouseScript.paperPresent = true;
+                    }
                 }
             }
+            else
+            {
+                // If this is a new game, send the reset paper booleans to the mouse script:
+                mouseScript.hasPaper = false;
+                mouseScript.paperPresent = true;
+            }
+        }
+        else
+        {
+            // If there is no save slot, also send the reset paper booleans to the mouse script:
+            mouseScript.hasPaper = false;
+            mouseScript.paperPresent = true;
         }
 
         hungerAmount = PlayerPrefs.GetFloat("SavedHunger");

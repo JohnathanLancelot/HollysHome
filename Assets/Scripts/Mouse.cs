@@ -74,10 +74,10 @@ public class Mouse : MonoBehaviour
     public bool hasWon = false;
 
     // Boolean showing if the mouse is carrying paper:
-    public bool hasPaper = false;
+    public bool hasPaper;
 
     // Boolean showing if the paper is present in the environment:
-    public bool paperPresent = true;
+    public bool paperPresent;
 
     float moveX;
 
@@ -96,6 +96,19 @@ public class Mouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check what colour the paper should be (clear or white),
+        // and make it the correct colour:
+        if (paperPresent == true)
+        {
+            // Make it visible:
+            paperMaterial.material = pillowMat.material;
+        }
+        else
+        {
+            // Make it invisible:
+            paperMaterial.material = transparentMaterial.material;
+        }
+
         moveZ = Input.GetAxis("Horizontal") * -1;
         moveX = Input.GetAxis("Vertical");
 
@@ -260,6 +273,10 @@ public class Mouse : MonoBehaviour
                 hasPaper = true;
                 paperPresent = false;
 
+                // Save these values:
+                PlayerPrefs.SetInt("HasPaper", 1);
+                PlayerPrefs.SetInt("PaperPresent", 0);
+
                 // Play the paper SFX:
                 if (!inGameScript.soundEffectsMuted)
                 {
@@ -276,6 +293,9 @@ public class Mouse : MonoBehaviour
             {
                 // Change hasPaper to false:
                 hasPaper = false;
+
+                // Save this value:
+                PlayerPrefs.SetInt("HasPaper", 0);
 
                 // Play the nesting SFX:
                 if (!inGameScript.soundEffectsMuted)

@@ -17,11 +17,15 @@ public class StartScreenCode : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI lastSaved;
 
+    Mouse mouseScript;
+
     // Start Function:
     void Start()
     {
         loadGame.SetActive(false);
         gameControls.SetActive(false);
+
+        mouseScript = FindObjectOfType<Mouse>();
     }
 
     // New Game Button:
@@ -39,6 +43,11 @@ public class StartScreenCode : MonoBehaviour
         // Tell the mouse script that a previously-saved game
         // is not being used:
         PlayerPrefs.SetInt("LoadedGame", 0);
+
+        // Reset the paper booleans so the paper hasn't been
+        // picked up yet:
+        PlayerPrefs.SetInt("HasPaper", 0);
+        PlayerPrefs.SetInt("PaperPresent", 1);
 
         SceneManager.LoadScene(1);
     }
