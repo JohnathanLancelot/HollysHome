@@ -4741,6 +4741,10 @@ PrefabInstance:
       value: HUD
       objectReference: {fileID: 0}
     - target: {fileID: 5371710284672328159, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371710284672328159, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
