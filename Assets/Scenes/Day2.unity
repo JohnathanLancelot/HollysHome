@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 574423113}
     - target: {fileID: 486177916874225995, guid: c5b6b9502522385499bf94e4e1951647, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 486177916874225995, guid: c5b6b9502522385499bf94e4e1951647, type: 3}
       propertyPath: m_LocalPosition.x
@@ -754,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4790544052494624, guid: bf2c0bf3ad9171a42a865b2d0bf0cb13, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4790544052494624, guid: bf2c0bf3ad9171a42a865b2d0bf0cb13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -811,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3b627432fa2fc314b8b6e791317c76a9, type: 2}
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_Name
-      value: Wall (1)
+      value: RightWall
       objectReference: {fileID: 0}
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -819,7 +819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7570756500513007751, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7570756500513007751, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_LocalScale.z
@@ -1155,7 +1155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1203,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_Name
-      value: Chair (1)
+      value: Chair2
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1236,7 +1236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518140136887919455, guid: b52a6df8fd776c24ea58b7264486ae4a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6518140136887919455, guid: b52a6df8fd776c24ea58b7264486ae4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -1313,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1361,7 +1361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_Name
-      value: Chair
+      value: Chair3
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3340,7 +3340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4421853211597355759, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3388,7 +3388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_Name
-      value: Chair (2)
+      value: Chair1
       objectReference: {fileID: 0}
     - target: {fileID: 5618307193456734904, guid: b2b3ca8c8106c624c8846ee4179a8e23, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3756,7 +3756,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_Name
-      value: Wall
+      value: BackWall
       objectReference: {fileID: 0}
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3764,7 +3764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7570756500513007751, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7570756500513007751, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4956,7 +4956,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3b627432fa2fc314b8b6e791317c76a9, type: 2}
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_Name
-      value: Wall (2)
+      value: LeftWall
       objectReference: {fileID: 0}
     - target: {fileID: 4227070576875321454, guid: 9547db325d67e6f4aaaaa84dfd6a471f, type: 3}
       propertyPath: m_StaticEditorFlags
