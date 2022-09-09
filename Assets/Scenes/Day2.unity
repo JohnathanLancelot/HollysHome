@@ -1545,6 +1545,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Day 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5371710285305391434, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
+    - target: {fileID: 5371710285305391434, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3835449586202542326, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
     - target: {fileID: 5371710285373414692, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -1557,6 +1565,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5371710286350918693, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_text
+      value: Hunger    |    Thirst
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371710286350918693, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
+    - target: {fileID: 5371710286350918693, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3835449586202542326, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
     - target: {fileID: 5371710286350918695, guid: 9bf2ca58d1cd0c247a4e412b66c3e1a7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -2028,8 +2048,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nest 0% Complete.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8d25b1b932e4a74d8f212015f1b678d, type: 2}
+  m_sharedMaterial: {fileID: 5494720992151147038, guid: e8d25b1b932e4a74d8f212015f1b678d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2380,8 +2400,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: you made it 5 days!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8d25b1b932e4a74d8f212015f1b678d, type: 2}
+  m_sharedMaterial: {fileID: 5494720992151147038, guid: e8d25b1b932e4a74d8f212015f1b678d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3548,8 +3568,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Congratulations,
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
+  m_sharedMaterial: {fileID: -3835449586202542326, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4272,8 +4292,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: press 'x' to exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
+  m_sharedMaterial: {fileID: -3835449586202542326, guid: d68213358834ed846bd5ef396e6ee0bc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4297,8 +4317,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
