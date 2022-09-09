@@ -61,7 +61,7 @@ public class StartScreenCode : MonoBehaviour
         if (PlayerPrefs.GetInt("SlotFilled") == 1)
         {
             // Tell the user when the game was last saved:
-            lastSaved.text = PlayerPrefs.GetString("LastSaved");
+            lastSaved.text = "Game last saved:  " + PlayerPrefs.GetString("LastSaved");
         }
         else
         {
